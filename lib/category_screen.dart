@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'category.dart';
+import 'unit.dart';
 
 final title = 'Unit Converter';
 final titleSize = 30.0;
 final bodyColor = Colors.green[100];
 
-class CategoryRoute extends StatelessWidget {
-  const CategoryRoute();
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen();
 
   static const categoryNames = <String>[
     'Length',
@@ -37,6 +38,17 @@ class CategoryRoute extends StatelessWidget {
       itemCount: categories.length,
     );
   }
+  /// Creates a list of Unit objects
+  List<Unit> _retrieveUnitList(String categoryName) {
+    return List.generate(10, (int i) {
+      i += 1;
+      return Unit(
+        name: '$categoryName Unit $i',
+        conversion: i.toDouble(),
+      );
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +58,7 @@ class CategoryRoute extends StatelessWidget {
         name: categoryNames[index],
         color: baseColor[index],
         iconLocation: Icons.cake,
+        unit: _retrieveUnitList(categoryNames[index]),
       ));
     }
 
@@ -60,7 +73,7 @@ class CategoryRoute extends StatelessWidget {
       title: Text(
         'Unit Converter',
         style: TextStyle(
-          color: Colors.red,
+          color: Colors.black,
           fontSize: 30.0,
         ),
       ),
